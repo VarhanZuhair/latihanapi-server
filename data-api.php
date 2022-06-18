@@ -2,22 +2,31 @@
 $dbhost = 'localhost';
 $dbuser = 'root'; // disesuaikan usernamenya
 $dbpass = ''; // disesuaikan passsnya
-$dbname = ''; // masukin nama databasenya sesuai
+$dbname = 'latihan-api'; // masukin nama databasenya sesuai
 
 // inisialisasi mysql
 // (DISI)
+$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
 // kondisi pengecekan apakah mysql berhasil tersambung atau tidak
 // (DISI)
+if($mysqli->connect_errno){
+    printf("Failed to connect to database");
+}
 
 // membuat sebuah query untuk menampilkan seluruh isi data table
 // (DISI)
+$query = "SELECT * FROM dataku";
 
 // memproses query yang sebelumnya harus tersambung oleh database
 // (DISI)
+$result = $mysqli->query($query)
+    or die($mysqli->error);
 
 // mmebuat sebuah array kosongan
 // (DISI)
+$response = array();
+$posts = array();
 
 // melakukan perulangan untuk mencetak/mengambil seluruh data/row yang ada di kolom
 while($row = $result->fetch_assoc()) {
